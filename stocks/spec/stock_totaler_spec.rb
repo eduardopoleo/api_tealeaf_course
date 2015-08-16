@@ -12,13 +12,13 @@ end
 
 RSpec.describe "stock totaler" do
   it "calculates stock share value", :vcr do
-    total_value = calculate("TSLA", 1)
+    total_value = calculate_value("TSLA", 1)
     expect(total_value).to eq(243.16)
   end
 
   it "handles invalid stock symbol", :vcr do
     expect(->{
-      calculate("ZZZZ", 1) 
+      calculate_value("ZZZZ", 1) 
     }).to raise_error(SymbolNotFound, /No symbol matches/)
   end
 
@@ -29,7 +29,7 @@ RSpec.describe "stock totaler" do
    ).to_timeout
 
     expect(->{
-      calculate("ZZZZ", 1)
+      calculate_value("ZZZZ", 1)
     }).to raise_error(RequestFailed, /execution expired/)
   end
 end
