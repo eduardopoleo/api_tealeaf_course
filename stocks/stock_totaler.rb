@@ -10,10 +10,10 @@ def calculate(symbol, quantity)
 
   price = data["LastPrice"]
   total = price.to_f * quantity.to_i
-  puts response.body
+  puts JSON.pretty_generate(JSON(response.body))
 end
 
-calculate("TSLA", 1)
+calculate("TSLA", 2)
 
 # symbol, quantity = ARGV
 # puts total if $0 == __FILE__
