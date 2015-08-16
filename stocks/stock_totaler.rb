@@ -10,7 +10,7 @@ def calculate(symbol, quantity)
 
   price = data["LastPrice"]
   total = price.to_f * quantity.to_i
-  puts JSON.pretty_generate(JSON(response.body))
+  #JSON.pretty_generate(JSON(response.body)) to get a prettyfy response 
 end
 
 calculate("TSLA", 2)
