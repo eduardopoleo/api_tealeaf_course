@@ -15,4 +15,10 @@ RSpec.describe "stock totaler" do
     total_value = calculate("TSLA", 1)
     expect(total_value).to eq(243.16)
   end
+
+  it "handles invalid stock symbol", :vcr do
+    expect(->{
+      calculate("ZZZZ", 1) 
+    }).to raise_error(SymbolNotFound, /No symbol matches/)
+  end
 end
