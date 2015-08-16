@@ -21,4 +21,15 @@ RSpec.describe "stock totaler" do
       calculate("ZZZZ", 1) 
     }).to raise_error(SymbolNotFound, /No symbol matches/)
   end
+
+  it "handles an exception from Faraday" do
+    stub_request(
+      :get,
+      "http://dev.markitondemand.com/Api/v2/Quote/json?symbol=ZZZZ"
+   ).to_timeout
+
+    expect(->{
+      calculate("ZZZZ", 1)
+    }).to raise_error(RequestFailed, /execution expired/)
+  end
 end
